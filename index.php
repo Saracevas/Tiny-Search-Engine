@@ -4,7 +4,9 @@ session_start();
 include "cookie.php";
 
 if (isset($_SESSION['username'])) {
-	$usname = $_SESSION['username']; { header("location: search.php"); }}
+	$usname = $_SESSION['username']; 
+	header("location: search.php");
+}
 
 if (isset($_POST['username'])) {
 	include_once("dbcon.php");
@@ -22,7 +24,6 @@ if (isset($_POST['username'])) {
 	$dbPassword = $row[1];
 	
 	if (mysqli_num_rows($query) == 1 && $usname == $dbUsname && $paswd == $dbPassword) {
-	
 		$_SESSION['username'] = $usname;
 		setcookie('username', $usname, time() + 60*60*24*365);
 		header("Location: search.php");
